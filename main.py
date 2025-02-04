@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+from tkinter import simpledialog
 import chess
 import chess.engine
 import os
@@ -9,9 +10,18 @@ STOCKFISH_PATH = "stockfish/stockfish-windows-x86-64-avx2.exe"
 engine = chess.engine.SimpleEngine.popen_uci(STOCKFISH_PATH)
 
 # Ask user for side choice
+
+root = tk.Tk()
+root.withdraw()  # Hide main window
+
+player_color = simpledialog.askstring("Choose Side", "Do you want to play as White or Black? (w/b):").strip().lower()
+player_is_white = player_color == 'w'
+root.deiconify()  # Show main window after choice
+
+'''
 player_color = input("Do you want to play as White or Black? (w/b): ").strip().lower()
 player_is_white = player_color == 'w'
-
+'''
 # Initialize Chess Board
 board = chess.Board()
 
